@@ -1195,7 +1195,7 @@ footer .social a:hover {
 /* Responsive (500px) */
 @media(max-width: 500px) {
     .home {
-        background-image: url("../images/portfolio/Micael_Profile_Responsive.jpg");
+        background-image: url("../images/Micael_Profile_Responsive.jpg");
     }
     .home .home-content .block h1 {
         font-size: 500%;
