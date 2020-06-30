@@ -136,7 +136,7 @@ function autoplay(){
     else {
         autoSlide++;
     }
-    //changeSlide(autoSlide)
+    changeSlide(autoSlide)
 }
 
 let timer=setInterval(autoplay,5000);
