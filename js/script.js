@@ -1,10 +1,9 @@
-    
 // gallery item filter
-const filterButtons=document.querySelector("#filter-btns").children;
-const items=document.querySelector(".portfolio-gallery").children;
+const filterButtons=document.querySelector("#filter-btns").children,
+      items=document.querySelector(".portfolio-gallery").children;
 
     for(let i=0; i<filterButtons.length; i++){
-        filterButtons[i].addEventListener("click",function(){
+        filterButtons[i].addEventListener("click", function(){
             for(let j=0; j<filterButtons.length; j++){
                 filterButtons[j].classList.remove("active")
                 
@@ -27,12 +26,10 @@ const items=document.querySelector(".portfolio-gallery").children;
             
         })
     }
-
 // Lightbox
-
 const closeLightbox=document.querySelector(".close-lightbox");
 const lightbox=document.querySelector(".lightbox");
-const lightboxImage=lightbox.querySelector("img")
+const lightboxImage=lightbox.querySelector("img");
 
     lightbox.addEventListener("click", function(){
         if(event.target!=lightboxImage){
@@ -65,6 +62,7 @@ const slides=sliderContainer.children;
 const containerWidth=sliderContainer.offsetWidth;
 const margin=30;
 let itemPerSlide=0;
+let slideDots;
 
 // Responsive
 const responsive=[
@@ -108,8 +106,12 @@ function start(){
 }
 
 let currentSlide=0;
+let autoSlide=0;
 
 function controlSlide(element){
+    clearInterval(timer)
+    timer=setInterval(autoplay,5000);
+    autoSlide=element.id;
     currentSlide=element.id;
     changeSlide(currentSlide)
 }
@@ -121,10 +123,63 @@ function changeSlide(currentSlide){
             controlButtons[i].classList.remove("active")
     }
     
-    controlButtons[currentSlide].classList.add("active")
+            controlButtons[currentSlide].classList.add("active")
     
     sliderContainer.style.marginLeft=-(containerWidth*currentSlide) + "px";
 }
 
+function autoplay(){
+    //console.log("call")
+    if(autoSlide==slideDots-1){
+        autoSlide=0;
+    }
+    else {
+        autoSlide++;
+    }
+    //changeSlide(autoSlide)
+}
+
+let timer=setInterval(autoplay,5000);
 
 window.onload=load();
+
+
+
+// Header Fixed
+
+window.onscroll=function(){
+    const docScrollTop=document.documentElement.scrollTop;
+    
+    if(window.innerWidth>991){
+        if(docScrollTop>100){
+            document.querySelector("header").classList.add("fixed")
+        }
+        else{
+            document.querySelector("header").classList.remove("fixed")
+        }
+    }
+}
+
+
+// Navbar Links 
+
+const navbar = document.querySelector(".navbar");
+        a=navbar.querySelectorAll("a");
+
+        a.forEach(function(element){
+            element.addEventListener("click", function(){
+                for(let i=0; i<a.length; i++){
+                    a[i].classList.remove("active");
+                }
+                this.classList.add("active")
+                document.querySelector(".navbar").classList.toggle("show");
+            })
+        })
+
+// hamburguer
+
+const hamBurguer=document.querySelector(".ham-burguer");
+
+hamBurguer.addEventListener("click", function(){
+    document.querySelector(".navbar").classList.toggle("show");
+})
